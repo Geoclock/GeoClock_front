@@ -1,21 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import {Button, Image, ImageBackground, StyleSheet, Text, View} from "react-native";
+import DefaultImage from "./assets/start.png";
+const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
 
-export default function App() {
+export default function PrestartScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Sonia starts working on Geoclock!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.container}>
+        <ImageBackground source={{uri: DEFAULT_IMAGE}}
+                         style={styles.image}
+        >
+          <Text style={styles.text}>G E O C L O C K</Text>
+        </ImageBackground>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8fcc8',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column"
   },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+  text: {
+    color: "#E9ECF6",
+    fontSize: 36,
+    fontWeight: "bold",
+    textAlign: "center"
+  }
 });
