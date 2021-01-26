@@ -1,0 +1,43 @@
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import HomeScreen from "../screens/StartScreen";
+import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import ResetPassMessageScreen from "../screens/ResetPassMessageScreen";
+import ResetPassEmailScreen from "../screens/ResetPassEmailScreen";
+import ResetPassNewScreen from "../screens/ResetPassNewScreen";
+import {StyleSheet} from "react-native";
+import {View} from "react-native-web";
+
+const screens = {
+        Start:{
+            screen: HomeScreen
+        },
+        Register:{
+            screen: RegisterScreen
+        },
+        Login:{
+            screen: LoginScreen
+        },
+        Reset1:{
+            screen: ResetPassEmailScreen
+        },
+        Reset2:{
+            screen: ResetPassMessageScreen
+        },
+        Reset3:{
+            screen:ResetPassNewScreen
+        }
+
+}
+const styles = StyleSheet.create({
+    screen:{
+        backgroundColor: 'rgba(68,47,110,1)',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+    }
+
+})
+const StartStack = createStackNavigator(screens);
+export default createAppContainer(StartStack);
+
