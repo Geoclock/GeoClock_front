@@ -31,7 +31,7 @@ export default function Registration({navigation}){
                 <TextInput style={styles.textinput} placeholder="password" secureTextEntry={true} underlineColorAndroid={'transparent'} />
                 <TextInput style={styles.textinput} placeholder="Confirm password" secureTextEntry={true} underlineColorAndroid={'transparent'} />
                 <TouchableOpacity style={styles.button}
-                onPress={() => navigation.navigate('Start')}>
+                onPress={() => navigation.navigate('Default')}>
                     <Text style={styles.btntext}>Sign up</Text>
                 </TouchableOpacity>
                 <View>

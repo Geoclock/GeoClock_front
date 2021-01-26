@@ -32,7 +32,7 @@ export default function ResetPasswordNew({ navigation }) {
                        secureTextEntry={true}
                        underlineColorAndroid={'transparent'}/>
             <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate('Start')}>
+            onPress={() => navigation.navigate('Default')}>
                 <Text style={styles.btntext}>Save</Text>
             </TouchableOpacity>
         </View>

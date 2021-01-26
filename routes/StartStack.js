@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import HomeScreen from "../screens/StartScreen";
+import HomeScreen from "../screens/Start";
+import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import ResetPassMessageScreen from "../screens/ResetPassMessageScreen";
@@ -10,8 +11,11 @@ import {StyleSheet} from "react-native";
 import {View} from "react-native-web";
 
 const screens = {
-        Start:{
+        Default:{
             screen: HomeScreen
+        },
+        Start:{
+            screen: StartScreen
         },
         Register:{
             screen: RegisterScreen
