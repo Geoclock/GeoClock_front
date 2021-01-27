@@ -9,16 +9,21 @@ const wH = Dimensions.get('window').height;
 export default function ResetPasswordEmail({ navigation }) {
       const [text1, setText1] = useState('');
       return (
-          <View style={styles.container}>
-              <View style={styles.rectangle_back}>
-                  {/*<TouchableOpacity style={styles.button1}>*/}
-                  {/*  <Image source = {require('./assets/arrow.png')} style = {{ width: 33, height: 20}}/>*/}
-                  {/*</TouchableOpacity>*/}
-                  <Text style={styles.title}>GEOCLOCK</Text>
-                  <View style={styles.rectangle}>
-                        <Text style={{color: '#242F68', marginTop: 0.09*wH, fontSize: 24, textAlign: 'center'}}>RESET THE
-                            PASSWORD</Text>
-                        <Text style={{color: 'rgba(0, 0, 0, 0.52)', marginTop: 0.03*wH, fontSize: 12, textAlign: 'center'}}>Write
+          <View
+              style={styles.container}>
+              <View
+                  style={styles.rectangle_back}>
+                  <Text
+                      style={styles.title}>
+                      GEOCLOCK
+                  </Text>
+                  <View
+                      style={styles.rectangle}>
+                        <Text
+                            style={{color: '#242F68', marginTop: 0.09*wH, fontSize: 24, textAlign: 'center'}}>
+                            RESET THE PASSWORD</Text>
+                        <Text
+                            style={{color: 'rgba(0, 0, 0, 0.52)', marginTop: 0.03*wH, fontSize: 12, textAlign: 'center'}}>Write
                             email to send reset-letter to</Text>
                   </View>
               </View>
@@ -28,9 +33,11 @@ export default function ResetPasswordEmail({ navigation }) {
                   onChangeText={text1 => setText1(text1)}
                   defaultValue={text1}
               />
-              <TouchableOpacity style={styles.button}
+              <TouchableOpacity
+                  style={styles.button}
                   onPress={() => navigation.navigate('Reset2')}>
-              <Text style={styles.btntext}>Send</Text>
+              <Text
+                  style={styles.btntext}>Send</Text>
               </TouchableOpacity>
           </View>
       );

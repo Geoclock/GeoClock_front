@@ -7,17 +7,21 @@ const Wh = Dimensions.get('window').height;
 
 export default function StartScreen({navigation}) {
   return (
-    <View style={styles.container}>
-      <ImageBackground source={StartImage} style={styles.image}>
-        {/*<Text style={styles.texttry}>GEOCLOCK</Text>*/}
-        <TouchableOpacity  style={styles.sign_in}
-         onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.text}>Sign in</Text>
+    <View
+        style={styles.container}>
+        <ImageBackground source={StartImage} style={styles.image}>
+        <TouchableOpacity
+            style={styles.sign_in}
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.text}>Sign in</Text>
         </TouchableOpacity>
-        <TouchableOpacity  style={styles.sign_up}
-        onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.text}>Sign up</Text>
+
+        <TouchableOpacity
+            style={styles.sign_up}
+            onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.text}>Sign up</Text>
         </TouchableOpacity>
+
       </ImageBackground>
     </View>
   );
@@ -43,20 +47,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 31,
     textAlign: "center",
-    //fontFamily: "sans-serif-medium",
     fontFamily: "monospace",
     letterSpacing: 6,
     fontWeight: "600",
-
-    lineHeight: 50,
-
-    //textShadowColor:'white',
-    //textShadowOffset:{width: 0, height: 0},
-    //textShadowRadius:3
-    //font
-    //fontFamily: "notoserif"
-    //fontFamily: "sans-serif"
-    //fontFamily: "Roboto"
   },
   sign_in:{
     height: 40,
@@ -82,5 +75,4 @@ const styles = StyleSheet.create({
     zIndex: 1,
     justifyContent: 'center'
   }
-
 });

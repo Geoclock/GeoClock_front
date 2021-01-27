@@ -1,19 +1,14 @@
+import {StyleSheet} from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import HomeScreen from "../screens/Start";
 import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import ResetPassMessageScreen from "../screens/ResetPassMessageScreen";
 import ResetPassEmailScreen from "../screens/ResetPassEmailScreen";
 import ResetPassNewScreen from "../screens/ResetPassNewScreen";
-import {StyleSheet} from "react-native";
-import {View} from "react-native-web";
 
 const screens = {
-        Default:{
-            screen: HomeScreen
-        },
         Start:{
             screen: StartScreen
         },
@@ -32,8 +27,8 @@ const screens = {
         Reset3:{
             screen:ResetPassNewScreen
         }
-
 }
+
 const styles = StyleSheet.create({
     screen:{
         backgroundColor: 'rgba(68,47,110,1)',

@@ -1,26 +1,32 @@
 import React from 'react';
-import {StyleSheet, Image, Text, TextInput, View, TouchableOpacity, Dimensions, Button} from 'react-native';
+import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions} from 'react-native';
 
 const wW= Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
 
 export default function ResetPasswordNew({ navigation }) {
     return (
-        <View style={styles.container}>
-            <View style={styles.rectangle_back}>
-                <Button
-                    title="Go to start page"
-                    onPress={() => navigation.navigate('Start')}
-                  />
-                {/*<TouchableOpacity style={styles.button1}>*/}
-                {/*    <Image source = {require('./assets/arrow.png')} style = {{ width: 33, height: 20}}/>*/}
-                {/*</TouchableOpacity>*/}
+        <View
+            style={styles.container}>
+            <View
+                style={styles.rectangle_back}>
                 <Text style={styles.title}>GEOCLOCK</Text>
-                <View style={styles.rectangle}>
-                    <Text style={{color: '#242F68', marginTop: 0.09*wH, fontSize: 24, textAlign: 'center'}}>RESET THE
-                          PASSWORD</Text>
-                    <Text style={{color: 'rgba(0, 0, 0, 0.52)', marginTop: 0.03*wH, fontSize: 12, textAlign: 'center'}}>Write
-                        your new password</Text>
+                <View
+                    style={styles.rectangle}>
+                    <Text
+                        style={{
+                            color: '#242F68',
+                            marginTop: 0.09*wH,
+                            fontSize: 24,
+                            textAlign: 'center'
+                            }}>RESET THE PASSWORD</Text>
+                    <Text
+                        style={{
+                            color: 'rgba(0, 0, 0, 0.52)',
+                            marginTop: 0.03*wH,
+                            fontSize: 12,
+                            textAlign: 'center'
+                            }}>Write your new password</Text>
                 </View>
             </View>
             <TextInput style={styles.textinput}
@@ -31,8 +37,9 @@ export default function ResetPasswordNew({ navigation }) {
                        placeholder="Confirm Password"
                        secureTextEntry={true}
                        underlineColorAndroid={'transparent'}/>
-            <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate('Default')}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('Start')}>
                 <Text style={styles.btntext}>Save</Text>
             </TouchableOpacity>
         </View>

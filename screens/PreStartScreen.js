@@ -6,9 +6,7 @@ const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
 export default function PrestartScreen() {
   return (
       <View style={styles.container}>
-        <ImageBackground source={{uri: DEFAULT_IMAGE}}
-                         style={styles.image}
-        >
+        <ImageBackground source={{uri: DEFAULT_IMAGE}} style={styles.image}>
           <Text style={styles.text}>G E O C L O C K</Text>
         </ImageBackground>
       </View>

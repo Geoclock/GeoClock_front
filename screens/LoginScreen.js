@@ -11,18 +11,23 @@ export default function LoginScreen({ navigation }) {
     const [text1, setText1] = useState('');
     const [text2, setText2] = useState('');
     return (
-          <View style={styles.container}>
-              <View style={styles.rectangle_back}>
-                  <Text style={styles.title}>GEOCLOCK</Text>
-                  <View style={styles.rectangle}>
-                      <Text style={{
+          <View
+              style={styles.container}>
+              <View
+                  style={styles.rectangle_back}>
+                  <Text
+                      style={styles.title}>GEOCLOCK</Text>
+                  <View
+                      style={styles.rectangle}>
+                      <Text
+                          style={{
                           color: '#242F68',
                           marginTop: 0.04*wH,
                           fontSize: 24,
                           textAlign: 'center',
-                            paddingBottom: 0.07*wH,
-                            fontWeight: 'bold',
-                            alignItems: 'center',
+                          paddingBottom: 0.07*wH,
+                          fontWeight: 'bold',
+                          alignItems: 'center',
                       }}>SIGN IN</Text>
                   </View>
               </View>
@@ -43,28 +48,42 @@ export default function LoginScreen({ navigation }) {
                 />
 
                 <Text style={styles.text2}>Forgot password?
-                <TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Reset1')}>
                     <Text style={{
+                        position: 'absolute',
+                        textAlign: 'center',
                         fontSize: 12,
                         color: "gray",
                         textDecorationLine: 'underline',
-                    }}> Reset it </Text>
+                        marginTop: -12.1,
+                        //marginLeft: 50 ,
+                        height: 34,
+                        }}> Reset it</Text>
                 </TouchableOpacity>
                 </Text>
 
-                <TouchableOpacity style={styles.button}
-                onPress={() => navigation.navigate('Default')}>
-                    <Text style={styles.buttontext}>Sign in</Text>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Start')}>
+                    <Text
+                        style={styles.buttontext}>Sign in</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button1}>
-                    <Text style={styles.boldsmalltext2}>Sign in with<Image source={{uri: Googleimg}}
-                         style={styles.image}></Image></Text>
-                </TouchableOpacity>
-                <Text style={styles.smalltext}>Don`t have an account?
 
-                    <TouchableOpacity>
-                        <Text style={styles.boldsmalltext1}>Sign up</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity style={styles.button1}>
+                    <Text
+                        style={styles.boldsmalltext2}>Sign in with
+                        <Image source={{uri: Googleimg}}
+                               style={styles.image}></Image>
+                    </Text>
+                </TouchableOpacity>
+
+                <Text style={styles.smalltext}>Don`t have an account?
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.boldsmalltext1}> Sign up</Text>
+                </TouchableOpacity>
                 </Text>
           </View>
       );
@@ -105,12 +124,12 @@ const styles = StyleSheet.create({
   },
   text2: {
         position: 'absolute',
-        textAlign: 'center',
+        //textAlign: 'center',
         fontSize: 12,
         color: "gray",
-        marginTop: 350,
-        //marginLeft: 50 ,
+        marginTop: 335,
         width: 337,
+        left: 113,
         height: 34,
   },
   text_input: {
@@ -124,7 +143,6 @@ const styles = StyleSheet.create({
         borderBottomColor: '#242F68',
         borderBottomWidth: 2,
     },
-
     sign: {
         color: "#242F68",
         fontWeight: "bold",
@@ -141,7 +159,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         width: 290,
         height: 43,
-        marginTop: 223,
+        marginTop: 195,
         alignItems: 'center',
         alignSelf: 'center',
         borderBottomColor: '#242F68',
@@ -152,7 +170,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         width: 290,
         height: 43,
-        marginTop: 289,
+        marginTop: 253,
         alignItems: 'center',
         alignSelf: 'center',
         borderBottomColor: '#242F68',
@@ -167,7 +185,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         backgroundColor: '#442F6E',
-        marginTop: 389,
+        marginTop: 375,
         borderRadius: 33,
     },
     button1: {
@@ -197,6 +215,7 @@ const styles = StyleSheet.create({
     },
     boldsmalltext1: {
         fontSize: 12,
+        marginTop: 3,
         color: "gray",
         textDecorationLine: 'underline',
         justifyContent: 'space-around',
@@ -210,5 +229,4 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontWeight: "bold",
     },
-
 });
