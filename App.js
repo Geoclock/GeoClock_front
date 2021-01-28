@@ -1,21 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image } from 'react-native';
+import Navigator from './routes/StartStack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Sonia starts working on Geoclock!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default function App(){
+    return( <Navigator/> )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e8fcc8',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
