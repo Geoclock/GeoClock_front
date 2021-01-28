@@ -6,4 +6,5 @@ const Google = () => (
    style = {{ width: 20, height: 20, alignSelf: 'center'}}
    />
 )
+
 export default Google

@@ -39,10 +39,11 @@ export default function Registration({navigation}){
                                      textAlign: 'center',
                                      textDecorationLine: 'underline'}}>Sign up with <Google /></Text>
                     </TouchableOpacity>
+
                     <Text style={styles.text}>Already have an account?
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.text2}> Sign in</Text>
+                        <Text style={styles.text2}> Sign in</Text>
                     </TouchableOpacity></Text>
                 </View>
             </View>
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     zIndex: 0
   },
   header: {
-      color: '#242F68',
+      color: '#242f68',
       marginTop: 0.04*wH,
       fontSize: 24,
       textAlign: 'center',

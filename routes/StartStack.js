@@ -10,10 +10,18 @@ import ResetPassNewScreen from "../screens/ResetPassNewScreen";
 
 const screens = {
         Start:{
-            screen: StartScreen
+            screen: StartScreen,
         },
         Register:{
-            screen: RegisterScreen
+            screen: RegisterScreen,
+            navigationOptions: {
+                title: "homeeee",
+                headerTintColor: '#FFFBFB',
+                headerTitleAllowFontScaling: 'black',
+                headerStyle:{
+                    backgroundColor: 'rgb(68,47,110)',
+                }
+            }
         },
         Login:{
             screen: LoginScreen
@@ -31,9 +39,10 @@ const screens = {
 
 const styles = StyleSheet.create({
     screen:{
-        backgroundColor: 'rgba(68,47,110,1)',
+        //backgroundColor: 'rgba(68,47,110,1)',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
+
     }
 
 })
