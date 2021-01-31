@@ -1,7 +1,6 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image, Button} from 'react-native';
-import Google from "../assets/google.png";
+import Google from "../image_example";
 import React, {useState} from "react";
-const Googleimg = Image.resolveAssetSource(Google).uri;
 
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
@@ -73,9 +72,7 @@ export default function LoginScreen({ navigation }) {
 
                 <TouchableOpacity style={styles.button1}>
                     <Text
-                        style={styles.boldsmalltext2}>Sign in with
-                        <Image source={{uri: Googleimg}}
-                               style={styles.image}></Image>
+                        style={styles.boldsmalltext2}>Sign in with <Google />
                     </Text>
                 </TouchableOpacity>
 

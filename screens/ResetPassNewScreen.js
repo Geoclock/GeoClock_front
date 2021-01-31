@@ -1,10 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions} from 'react-native';
+import Http from "../ConnectionToFlask";
+import FlashMessage, {showMessage} from "react-native-flash-message";
 
 const wW= Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
 
 export default function ResetPasswordNew({ navigation }) {
+      const [text1, setText1] = useState('');
+      const [text2, setText2] = useState('');
+      const code = navigation.getParam('code', null)
+
+      const password_data = new FormData();
+      password_data.append('password', text1);
+      password_data.append('check_password', text2);
+
+      const OnClick = () => {
+          const resp = {}
+          Http.post('/New_password/' + code, password_data)
+              .then(function (response) {
+                  resp['status'] = response.data['status'];
+                  resp['message'] = response.data['message'];
+                  if(resp['status']==200){ navigation.navigate('Login'); }
+                  else {
+                      showMessage({
+                            message: resp['message'],
+                            textStyle: {
+                                fontSize: 20,
+                                textAlign: 'center',
+                                color: "white"
+                            },
+                            backgroundColor: "rgba(68,47,110,1)",
+                            color: "white"
+                      });
+                  }
+              })
+      }
+
     return (
         <View
             style={styles.container}>
@@ -29,19 +61,24 @@ export default function ResetPasswordNew({ navigation }) {
                             }}>Write your new password</Text>
                 </View>
             </View>
-            <TextInput style={styles.textinput}
-                       placeholder="Password"
-                       secureTextEntry={true}
-                       underlineColorAndroid={'transparent'}/>
+                       <TextInput
+                          style={styles.textinput}
+                          placeholder="Password"
+                          secureTextEntry={true}
+                          onChangeText={text1 => setText1(text1)}
+                          defaultValue={text1}
+                      />
             <TextInput style={styles.textinput2}
                        placeholder="Confirm Password"
                        secureTextEntry={true}
-                       underlineColorAndroid={'transparent'}/>
+                       onChangeText={text2 => setText2(text2)}
+                       defaultValue={text2}/>
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('Start')}>
+                onPress={OnClick}>
                 <Text style={styles.btntext}>Save</Text>
             </TouchableOpacity>
+            <FlashMessage position='top' />
         </View>
     );
 }
