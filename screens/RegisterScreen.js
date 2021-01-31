@@ -42,25 +42,7 @@ export default function Registration({ navigation }) {
            }
               })
       }
-// export default function Registration({navigation}){
-//     const [text1, setText1] = useState('');
-//     const [text2, setText2] = useState('');
-//     const [text3, setText3] = useState('');
-//     const [text4, setText4] = useState('');
-//     const pressHandler = async() => {
-//         navigation.navigate('ResetPasswordMessage');
-//     }
-//     const formData=new FormData();
-//     formData.append('login',text1);
-//     formData.append('email',text2);
-//     formData.append('password',text3);
-//     formData.append('password2',text4);
-//
-//
-//     const pressHandler_ = () => {
-//         Http.post('/Register',formData);
-//         navigation.navigate('Start');
-//     }
+
     return (
         <View
             style={styles.container}>
