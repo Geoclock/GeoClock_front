@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image, Button} from 'react-native';
+import Http from "../ConnectionToFlask";
+import FlashMessage from "react-native-flash-message";
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 
 const wW = Dimensions.get('window').width;
@@ -8,6 +11,32 @@ const wH = Dimensions.get('window').height;
 
 export default function ResetPasswordEmail({ navigation }) {
       const [text1, setText1] = useState('');
+
+      const email_data = new FormData();
+      email_data.append('email', text1);
+
+      const OnClick = () => {
+          const resp = {}
+          Http.post('/ResetPassword', email_data)
+              .then(function (response) {
+                  resp['status'] = response.data['status'];
+                  resp['message'] = response.data['message'];
+                  if(resp['status']==200){ navigation.navigate('Reset2'); }
+                  else {
+                      showMessage({
+                            message: resp['message'],
+                            textStyle: {
+                                fontSize: 20,
+                                textAlign: 'center',
+                                color: "white"
+                            },
+                            backgroundColor: "rgba(68,47,110,1)",
+                            color: "white"
+                  });
+           }
+              })
+      }
+
       return (
           <View
               style={styles.container}>
@@ -35,10 +64,11 @@ export default function ResetPasswordEmail({ navigation }) {
               />
               <TouchableOpacity
                   style={styles.button}
-                  onPress={() => navigation.navigate('Reset2')}>
+                  onPress={OnClick}>
               <Text
                   style={styles.btntext}>Send</Text>
               </TouchableOpacity>
+              <FlashMessage position='top' />
           </View>
       );
 }
@@ -107,3 +137,4 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
 });
+

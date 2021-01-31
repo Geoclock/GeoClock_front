@@ -1,34 +1,66 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import Google from "../image_example";
-import axios from 'axios';
+import Http from "../ConnectionToFlask";
+import FlashMessage from "react-native-flash-message";
+import { showMessage, hideMessage } from "react-native-flash-message";
 
-const Http = axios.create({
-    baseURL: "http://127.0.0.1:5000/"
-})
 
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
 
-export default function Registration({navigation}){
-    const [text1, setText1] = useState('');
-    const [text2, setText2] = useState('');
-    const [text3, setText3] = useState('');
-    const [text4, setText4] = useState('');
-    const pressHandler = async() => {
-        navigation.navigate('ResetPasswordMessage');
-    }
-    const formData=new FormData();
-    formData.append('login',text1);
-    formData.append('email',text2);
-    formData.append('password',text3);
-    formData.append('password2',text4);
+export default function Registration({ navigation }) {
+      const [text1, setText1] = useState('');
+      const [text2, setText2] = useState('');
+      const [text3, setText3] = useState('');
+      const [text4, setText4] = useState('');
 
+      const formData = new FormData();
+      formData.append('login',text1);
+      formData.append('email',text2);
+      formData.append('password',text3);
+      formData.append('password2',text4);
 
-    const pressHandler_ = () => {
-        Http.post('/Register',formData);
-        navigation.navigate('Start');
-    }
+      const OnClick = () => {
+          const resp = {}
+          Http.post('/Register', formData)
+              .then(function (response) {
+                  resp['status'] = response.data['status'];
+                  resp['message'] = response.data['message'];
+                  if(resp['status']==200){ navigation.navigate('Start'); }
+                  else {
+                      showMessage({
+                            message: resp['message'],
+                            textStyle: {
+                                fontSize: 20,
+                                textAlign: 'center',
+                                color: "white"
+                            },
+                            backgroundColor: "rgba(68,47,110,1)",
+                            color: "white"
+                  });
+           }
+              })
+      }
+// export default function Registration({navigation}){
+//     const [text1, setText1] = useState('');
+//     const [text2, setText2] = useState('');
+//     const [text3, setText3] = useState('');
+//     const [text4, setText4] = useState('');
+//     const pressHandler = async() => {
+//         navigation.navigate('ResetPasswordMessage');
+//     }
+//     const formData=new FormData();
+//     formData.append('login',text1);
+//     formData.append('email',text2);
+//     formData.append('password',text3);
+//     formData.append('password2',text4);
+//
+//
+//     const pressHandler_ = () => {
+//         Http.post('/Register',formData);
+//         navigation.navigate('Start');
+//     }
     return (
         <View
             style={styles.container}>
@@ -73,7 +105,7 @@ export default function Registration({navigation}){
                     defaultValue={text4}
                 />
                 <TouchableOpacity style={styles.button}
-                    onPress={pressHandler_}>
+                    onPress={OnClick}>
                     <Text style={styles.btntext}>Sign up</Text>
                 </TouchableOpacity>
 
@@ -92,6 +124,7 @@ export default function Registration({navigation}){
                         onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.text2}> Sign in</Text>
                     </TouchableOpacity></Text>
+                    <FlashMessage position='top' />
                 </View>
             </View>
         </View>
@@ -99,8 +132,7 @@ export default function Registration({navigation}){
 }
 
 const styles = StyleSheet.create({
-
-  container: {
+    container: {
       flex: 1,
       alignItems: 'center',
       backgroundColor: '#E5E5E5'
@@ -152,7 +184,7 @@ const styles = StyleSheet.create({
      width: 290,
      marginBottom: 15,
      color: "black",
-     borderBottomColor: '#140A36',
+     borderBottomColor: '#242F68',
      borderBottomWidth: 2,
     },
   button: {
@@ -164,10 +196,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#442F6E',
         marginTop: 35,
         marginBottom: 20,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
+        borderTopLeftRadius: 33,
+        borderTopRightRadius: 33,
+        borderBottomLeftRadius: 33,
+        borderBottomRightRadius: 33,
     },
   btntext: {
       color: '#e9ecf6',
