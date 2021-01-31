@@ -14,14 +14,14 @@ const screens = {
         },
         Register:{
             screen: RegisterScreen,
-            navigationOptions: {
-                title: "homeeee",
-                headerTintColor: '#FFFBFB',
-                headerTitleAllowFontScaling: 'black',
-                headerStyle:{
-                    backgroundColor: 'rgb(68,47,110)',
-                }
-            }
+            // navigationOptions: {
+            //     title: "homeeee",
+            //     headerTintColor: '#FFFBFB',
+            //     headerTitleAllowFontScaling: 'black',
+            //     headerStyle:{
+            //         backgroundColor: 'rgb(68,47,110)',
+            //     }
+            // }
         },
         Login:{
             screen: LoginScreen

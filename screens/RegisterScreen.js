@@ -39,11 +39,10 @@ export default function Registration({navigation}){
                                      textAlign: 'center',
                                      textDecorationLine: 'underline'}}>Sign up with <Google /></Text>
                     </TouchableOpacity>
-
                     <Text style={styles.text}>Already have an account?
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Login')}>
-                        <Text style={styles.text2}> Sign in</Text>
+                    <Text style={styles.text2}> Sign in</Text>
                     </TouchableOpacity></Text>
                 </View>
             </View>
@@ -52,8 +51,7 @@ export default function Registration({navigation}){
 }
 
 const styles = StyleSheet.create({
-
-  container: {
+    container: {
       flex: 1,
       alignItems: 'center',
       backgroundColor: '#E5E5E5'
@@ -85,7 +83,7 @@ const styles = StyleSheet.create({
     zIndex: 0
   },
   header: {
-      color: '#242f68',
+      color: '#242F68',
       marginTop: 0.04*wH,
       fontSize: 24,
       textAlign: 'center',
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
      width: 290,
      marginBottom: 15,
      color: "black",
-     borderBottomColor: '#140A36',
+     borderBottomColor: '#242F68',
      borderBottomWidth: 2,
     },
   button: {
@@ -117,10 +115,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#442F6E',
         marginTop: 35,
         marginBottom: 20,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
+        borderTopLeftRadius: 33,
+        borderTopRightRadius: 33,
+        borderBottomLeftRadius: 33,
+        borderBottomRightRadius: 33,
     },
   btntext: {
       color: '#e9ecf6',

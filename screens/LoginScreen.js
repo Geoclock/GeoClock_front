@@ -2,10 +2,8 @@ import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image, 
 import React, {useState} from "react";
 import Google from "../image_example";
 
-
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
-
 
 export default function LoginScreen({navigation}) {
     const [text1, setText1] = useState('');
@@ -19,60 +17,57 @@ export default function LoginScreen({navigation}) {
                     style={styles.title}>GEOCLOCK</Text>
                 <View
                     style={styles.rectangle}>
-                    <Text
-                        style={{
-                            color: '#242F68',
-                            marginTop: 0.04 * wH,
-                            fontSize: 24,
-                            textAlign: 'center',
-                            paddingBottom: 0.07 * wH,
-                            fontWeight: 'bold',
-                            alignItems: 'center',
-                        }}>SIGN IN</Text>
+                    <Text style={styles.header}>SIGN IN</Text>
                 </View>
             </View>
 
-            <TextInput
-                style={styles.username}
-                placeholder="Username"
-                onChangeText={text1 => setText1(text1)}
-                defaultValue={text1}
-            />
+            <View>
+                <TextInput
+                    style={styles.textinput}
+                    placeholder="Username"
+                    onChangeText={text1 => setText1(text1)}
+                    defaultValue={text1}
+                />
 
-            <TextInput
-                style={styles.password}
-                placeholder="Password"
-                secureTextEntry={true}
-                onChangeText={text2 => setText2(text2)}
-                defaultValue={text2}
-            />
+                <TextInput
+                    style={styles.textinput}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    onChangeText={text2 => setText2(text2)}
+                    defaultValue={text2}
+                />
 
-            <Text style={styles.text2}>Forgot password?</Text>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Reset1')}>
-                <Text style={styles.reset}> Reset it</Text>
-            </TouchableOpacity>
+                <Text style={styles.forgotpass}>Forgot password?
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Reset1')}>
+                        <Text style={styles.reset}> Reset it</Text>
+                    </TouchableOpacity>
+                </Text>
 
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('Start')}>
-                <Text style={styles.buttontext}>Sign in</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Start')}>
+                    <Text style={styles.signintext}>Sign in</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity
-                style={styles.button1}>
-                <Text style={styles.boldsmalltext2}>Sign in with<Google/></Text>
-            </TouchableOpacity>
 
-            <Text style={styles.smalltext}>Don`t have an account?
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.boldsmalltext1}> Sign up</Text>
-            </TouchableOpacity></Text>
+                <View>
+                    <TouchableOpacity
+                        style={styles.button1}>
+                        <Text style={styles.boldsmalltext1}>Sign in with<Google/></Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.smalltext}>Don`t have an account?
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Register')}>
+                            <Text style={styles.boldsmalltext2}> Sign up</Text>
+                        </TouchableOpacity>
+                    </Text>
+                </View>
+            </View>
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -101,66 +96,43 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         zIndex: 0
     },
-    image: {
-        width: 20,
-        height: 20,
-        alignSelf: 'center'
+    header:{
+        color: '#242F68',
+        marginTop: 0.04*wH,
+        fontSize: 24,
+        textAlign: 'center',
+        paddingBottom: 0.07*wH,
+        fontWeight: 'bold',
+        alignItems: 'center',
     },
-    text2: {
-        position: 'absolute',
+    textinput: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        fontSize: 15,
+        height: 43,
+        lineHeight: 20,
+        width: 290,
+        marginBottom: 23,
+        borderBottomColor: '#242F68',
+        borderBottomWidth: 2,
+    },
+    forgotpass: {
         fontSize: 12,
         color: "gray",
-        marginTop: 335,
-        width: 337,
-        left: 113,
-        height: 34,
-    },
-    text_input: {
         alignItems: 'center',
         alignSelf: 'center',
-        fontSize: 15,
-        marginTop: 29,
-        height: 40,
+        textAlign: 'right',
         width: 290,
-        color: "black",
-        borderBottomColor: '#242F68',
-        borderBottomWidth: 2,
+        paddingTop: 2,
+        marginBottom: 40,
     },
-    sign: {
-        color: "#242F68",
+    reset: {
+        fontSize: 12,
         fontWeight: "bold",
-        textAlign: 'center',
-        letterSpacing: 0.09,
-        width: 360,
-        height: 35,
-        marginTop: 73,
-        fontSize: 21,
-        zIndex: 1
-    },
-    username: {
-        position: "absolute",
-        fontSize: 15,
-        width: 290,
-        height: 43,
-        marginTop: 195,
-        alignItems: 'center',
-        alignSelf: 'center',
-        borderBottomColor: '#242F68',
-        borderBottomWidth: 2,
-    },
-    password: {
-        position: "absolute",
-        fontSize: 15,
-        width: 290,
-        height: 43,
-        marginTop: 253,
-        alignItems: 'center',
-        alignSelf: 'center',
-        borderBottomColor: '#242F68',
-        borderBottomWidth: 2,
+        color: "gray",
+        textDecorationLine: 'underline',
     },
     button: {
-        position: "absolute",
         width: 122,
         height: 40,
         flexDirection: 'row',
@@ -168,62 +140,40 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         backgroundColor: '#442F6E',
-        marginTop: 375,
+        marginBottom: 20,
         borderRadius: 33,
     },
-    button1: {
-        position: "absolute",
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0)',
-        marginTop: 460,
-    },
-    buttontext: {
+    signintext: {
         color: '#E9ECF6',
         fontSize: 16,
         fontWeight: 'bold',
         letterSpacing: 0.09
     },
-    smalltext: {
-        position: 'absolute',
-        fontSize: 12,
-        color: "gray",
-        marginTop: 490,
-        left: 100,
-        width: 337,
-        height: 34,
+    button1: {
+        alignItems: 'center',
+        height: wH*0.02,
     },
     boldsmalltext1: {
-        position: 'absolute',
-        textAlign: 'center',
         fontSize: 12,
-        //marginTop: 303,
-        //marginLeft: 45,
+        marginLeft: 15,
+        alignSelf: 'center',
         color: "gray",
         textDecorationLine: 'underline',
         fontWeight: "bold",
+    },
+    smalltext: {
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontSize: 12,
+        color: "gray",
+        height: 34,
+        width: 337,
+        paddingTop: 10,
     },
     boldsmalltext2: {
-        alignItems: 'center',
-        textAlign: 'center',
         fontSize: 12,
-        marginTop: -5,
-        marginLeft: 25,
         color: "gray",
         textDecorationLine: 'underline',
         fontWeight: "bold",
-    },
-    reset: {
-        position: 'absolute',
-        textAlign: 'center',
-        fontSize: 12,
-        color: "gray",
-        textDecorationLine: 'underline',
-        marginTop: 147,
-        marginLeft: 25,
-        height: 34,
-
     },
 });
