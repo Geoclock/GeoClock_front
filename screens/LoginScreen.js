@@ -1,6 +1,8 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image, Button} from 'react-native';
 import React, {useState} from "react";
 import Google from "../image_example";
+import Http from "../ConnectionToFlask";
+import FlashMessage, {showMessage} from "react-native-flash-message";
 
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
@@ -8,6 +10,33 @@ const wH = Dimensions.get('window').height;
 export default function LoginScreen({navigation}) {
     const [text1, setText1] = useState('');
     const [text2, setText2] = useState('');
+
+    const data = new FormData();
+    data.append('login', text1);
+    data.append('password', text2);
+
+    const OnClick = () => {
+        const resp = {}
+        Http.post('/Login', data)
+        .then(function (response) {
+            resp['status'] = response.data['status'];
+            resp['message'] = response.data['message'];
+            if(resp['status']==200){ navigation.navigate('Start');}
+            else {
+                showMessage({
+                    message: resp['message'],
+                    textStyle: {
+                        fontSize: 20,
+                        textAlign: 'center',
+                        color: "white",
+                    },
+                    backgroundColor: "rgba(68,47,110,1)",
+                    color: "white"
+                });
+            }
+        })
+    }
+
     return (
         <View
             style={styles.container}>
@@ -22,6 +51,8 @@ export default function LoginScreen({navigation}) {
             </View>
 
             <View>
+                <FlashMessage position='bottom'/>
+
                 <TextInput
                     style={styles.textinput}
                     placeholder="Username"
@@ -46,7 +77,7 @@ export default function LoginScreen({navigation}) {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('Start')}>
+                    onPress={OnClick}>
                     <Text style={styles.signintext}>Sign in</Text>
                 </TouchableOpacity>
 
@@ -63,6 +94,7 @@ export default function LoginScreen({navigation}) {
                             <Text style={styles.boldsmalltext2}> Sign up</Text>
                         </TouchableOpacity>
                     </Text>
+
                 </View>
             </View>
         </View>
