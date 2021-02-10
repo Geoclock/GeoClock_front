@@ -8,6 +8,8 @@ import Settings from "../Images/Settings";
 import Maps from "../Images/Map";
 import Add from "../Images/Add";
 import Delete from "../Images/Delete";
+import Name from "../Images/Name";
+import Post from "../Images/Post";
 import ScrollView from 'expo-faded-scrollview';
 
 
@@ -25,7 +27,25 @@ export default function AccountScreen({navigation}) {
 
       <View style={styles.rectangle1}>
           <ScrollView style={styles.rectangle} fadeSize={30}>
-            <Text style={styles.text}>Account</Text>
+            <Text style={styles.header}>PROFILE</Text>
+
+            <Text
+                style={styles.textinput}><Name /> Username:
+            </Text>
+            <Text
+                style={styles.text}>Example name
+            </Text>
+            <Text
+                style={styles.textinput}><Post /> E-mail:
+            </Text>
+            <Text
+                style={styles.text}>examplemail@mail.com
+            </Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Start')}
+                style={styles.button}>
+              <Text style={styles.btntext}>Logout</Text>
+            </TouchableOpacity>
              <LinearGradient
                 colors={['transparent', 'rgba(67,48,112,0.01)']}
                 style={styles.rectangle1}>
@@ -68,6 +88,21 @@ const styles = StyleSheet.create({
     width: Ww,
     height: Wh,
   },
+  input1: {
+      marginTop: Wh*0.01,
+    },
+  textinput: {
+     alignItems: 'center',
+     alignSelf: 'center',
+     fontSize: 15,
+     height: 30,
+     lineHeight: 20,
+     width: 290,
+     marginBottom: 0,
+     color: "rgba(0, 0, 0, 0.52)",
+     //borderBottomColor: '#242F68',
+     //borderBottomWidth: 2,
+    },
   rectangle: {
     width: Ww-40,
     height: Wh*0.795,
@@ -85,12 +120,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     backgroundColor: 'transparent',
-  },
-  text: {
-    fontSize: 36,
-    color: 'rgba(36,47,104,1)',
-    textAlign: 'center',
-    marginTop: 10
   },
   menu: {
       width: Ww/4,
@@ -138,4 +167,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute'
   },
+  text: {
+      fontSize: 15,
+      alignItems: 'center',
+      alignSelf: 'center',
+      color: "rgba(0,0,0,1)",
+      height: 35,
+      width: 290,
+      marginBottom: 10,
+      fontWeight: 'bold',
+    },
+    button: {
+        width: 122,
+        height: 40,
+        flexDirection: 'row', justifyContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(68,47,110,1)',
+        marginTop: 120,
+        borderTopLeftRadius: 33,
+        borderTopRightRadius: 33,
+        borderBottomLeftRadius: 33,
+        borderBottomRightRadius: 33,
+        zIndex: 1
+  },
+  btntext: {
+      color: '#e9ecf6',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+  header: {
+      color: '#242F68',
+      marginTop: 0.04*Wh,
+      fontSize: 21,
+      textAlign: 'center',
+      paddingBottom: 0.03*Wh,
+      fontWeight: 'bold',
+      alignItems: 'center',
+    },
 });
