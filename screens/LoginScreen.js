@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image, Button} from 'react-native';
 import React, {useState} from "react";
-import Google from "../image_example";
+import Google from "../Images/Google";
 import Http from "../ConnectionToFlask";
 import FlashMessage, {showMessage} from "react-native-flash-message";
 
@@ -35,16 +35,38 @@ export default function LoginScreen({navigation}) {
             }
         })
     }
+
+    const OnClick2 = () => {
+        const resp = {}
+        Http.get('/login')
+        .then(function (response) {
+            resp['status'] = response.data['status'];
+            resp['message'] = response.data['message'];
+            if(resp['status']==200){ navigation.navigate('Start');}
+                    else {
+                        showMessage({
+                        message: resp['message'],
+                        textStyle: {
+                            fontSize: 20,
+                            textAlign: 'center',
+                            color: "white",
+                        },
+                        backgroundColor: "rgba(68,47,110,1)",
+                        color: "white"
+                    });
+                }
+        })
+    }
+
     return (
         <View
             style={styles.container}>
             <View
                 style={styles.rectangle_back}>
-                <Text
-                    style={styles.title}>GEOCLOCK</Text>
+                <Text style={styles.title}>GEOCLOCK</Text>
                 <View
                     style={styles.rectangle}>
-                    <Text style={styles.header}>SIGN IN</Text>
+                       <Text style={styles.header}>SIGN IN</Text>
                 </View>
             </View>
 
@@ -74,20 +96,21 @@ export default function LoginScreen({navigation}) {
 
                 <TouchableOpacity
                     style={styles.button}
-                    //onPress={() => navigation.navigate('Default')}>
+                    onPress={() => navigation.navigate('Default')}>
                     onPress={OnClick}>
                     <Text style={styles.signintext}>Sign in</Text>
                 </TouchableOpacity>
 
                 <View>
                     <TouchableOpacity
-                        style={styles.button1}>
+                        style={styles.button1}
+                        onPress={OnClick2}>
                         <Text style={styles.boldsmalltext1}>Sign in with<Google/></Text>
                     </TouchableOpacity>
 
                     <Text style={styles.smalltext}>Don`t have an account?
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('Default')}>
+                            onPress={() => navigation.navigate('Register')}>
                             <Text style={styles.boldsmalltext2}> Sign up</Text>
                         </TouchableOpacity>
                     </Text>
