@@ -13,7 +13,6 @@ import Post from "../Images/Post";
 import ScrollView from 'expo-faded-scrollview';
 
 
-
 const Ww = Dimensions.get('window').width;
 const Wh = Dimensions.get('window').height;
 
