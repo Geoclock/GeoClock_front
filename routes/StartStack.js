@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
-import {createAppContainer, withNavigation} from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
@@ -12,6 +12,7 @@ import NotificationsScreen from "../screens/NotificationsScreen";
 import GeolocationsScreen from "../screens/GeolocationsScreen";
 import AccountScreen from "../screens/AccountScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import GoogleRegistrationScreen from "../screens/GoogleRegisterScreen";
 
 const wH = Dimensions.get('window').height;
 
@@ -25,6 +26,18 @@ const screens = {
         },
         Register:{
             screen: RegisterScreen,
+            navigationOptions: {
+                title: null,
+                headerTintColor: '#FFFBFB',
+                headerHideShadow: true,
+                headerStyle: {
+                    backgroundColor: 'rgb(68,47,110)',
+                    elevation:0,
+                    shadowColor: 'transparent',}
+            }
+        },
+        GoogleRegister:{
+            screen: GoogleRegistrationScreen,
             navigationOptions: {
                 title: null,
                 headerTintColor: '#FFFBFB',
@@ -142,7 +155,7 @@ const screens = {
                 headerTintColor: '#FFFBFB',
                 headerHideShadow: true,
                 headerStyle: {
-                    backgroundColor: 'rgba(67, 48, 112, 1)',
+                    backgroundColor: 'rgb(68,47,110)',
                     elevation:0,
                     shadowColor: 'transparent',}
             }

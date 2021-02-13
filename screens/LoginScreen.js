@@ -3,14 +3,21 @@ import React, {useState} from "react";
 import Google from "../Images/Google";
 import Http from "../ConnectionToFlask";
 import FlashMessage, {showMessage} from "react-native-flash-message";
+import * as Google1 from 'expo-google-app-auth';
+import {ActivityIndicator} from "react-native-web";
+
 
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
 
+
 export default function LoginScreen({navigation}) {
     const [text1, setText1] = useState('');
     const [text2, setText2] = useState('');
+    const [textGoogle1, setTextGoogle1] = useState('');
+    const [textGoogle2, setTextGoogle2] = useState('');
     const data = new FormData();
+    const Data = {'login': null, 'email': null};
     data.append('login', text1);
     data.append('password', text2);
 
@@ -36,15 +43,27 @@ export default function LoginScreen({navigation}) {
         })
     }
 
-    const OnClick2 = () => {
-        const resp = {}
-        Http.get('/login')
-        .then(function (response) {
-            resp['status'] = response.data['status'];
-            resp['message'] = response.data['message'];
-            if(resp['status']==200){ navigation.navigate('Start');}
-                    else {
-                        showMessage({
+    async function signInWithGoogleAsync() {
+        try {
+            const result = await Google1.logInAsync({
+              iosClientId: '744227890838-i11eoaf4crfiet6vckhfef1ubuhdhula.apps.googleusercontent.com',
+              androidClientId: '744227890838-labivtsmrsmb7likdrbpde1ug4mg6mb2.apps.googleusercontent.com',
+              scopes: ['profile', 'email'],
+            });
+        if (result.type === 'success') {
+              Data['login'] = result.user.name;
+              Data['email'] = result.user.email;
+              const data1 = new FormData();
+              data1.append('login', Data['login']);
+              data1.append('email', Data['email']);
+              Http.post('/GoogleLogin', data1)
+              .then(function (response) {
+                const resp = {}
+                resp['status'] = response.data['status'];
+                resp['message'] = response.data['message'];
+                if(resp['status']==200){ navigation.navigate('Default');}
+                else {
+                    showMessage({
                         message: resp['message'],
                         textStyle: {
                             fontSize: 20,
@@ -55,8 +74,14 @@ export default function LoginScreen({navigation}) {
                         color: "white"
                     });
                 }
-        })
-    }
+            })
+        } else {
+              console.log("cancelled");
+        }
+        } catch (e) {
+              console.log(e);
+        }
+}
 
     return (
         <View
@@ -96,7 +121,6 @@ export default function LoginScreen({navigation}) {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('Default')}>
                     onPress={OnClick}>
                     <Text style={styles.signintext}>Sign in</Text>
                 </TouchableOpacity>
@@ -104,7 +128,7 @@ export default function LoginScreen({navigation}) {
                 <View>
                     <TouchableOpacity
                         style={styles.button1}
-                        onPress={OnClick2}>
+                        onPress={signInWithGoogleAsync}>
                         <Text style={styles.boldsmalltext1}>Sign in with<Google/></Text>
                     </TouchableOpacity>
 

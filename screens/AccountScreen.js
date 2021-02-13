@@ -11,12 +11,25 @@ import Delete from "../Images/Delete";
 import Name from "../Images/Name";
 import Post from "../Images/Post";
 import ScrollView from 'expo-faded-scrollview';
+import Http from "../ConnectionToFlask";
+import {showMessage} from "react-native-flash-message";
 
 
 const Ww = Dimensions.get('window').width;
 const Wh = Dimensions.get('window').height;
 
 export default function AccountScreen({navigation}) {
+
+  const OnClick = () => {
+          const resp = {}
+          Http.get('/logout')
+              .then(function (response) {
+                  resp['status'] = response.data['status'];
+                  resp['message'] = response.data['message'];
+                  navigation.navigate('Start');
+              })
+  }
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -25,7 +38,7 @@ export default function AccountScreen({navigation}) {
       />
 
       <View style={styles.rectangle1}>
-          <ScrollView style={styles.rectangle} fadeSize={30}>
+          <ScrollView style={styles.rectangle} fadeSize={40} scrollThreshold={0} fadeColors={['rgba(255,255,255,0)', 'rgba(225, 225, 225, 0.75)']}>
             <Text style={styles.header}>PROFILE</Text>
 
             <Text
@@ -41,7 +54,7 @@ export default function AccountScreen({navigation}) {
                 style={styles.text}>examplemail@mail.com
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Start')}
+            <TouchableOpacity onPress={OnClick}
                 style={styles.button}>
               <Text style={styles.btntext}>Logout</Text>
             </TouchableOpacity>

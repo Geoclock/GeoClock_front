@@ -4,21 +4,22 @@ import Google from "../Images/Google";
 import Http from "../ConnectionToFlask";
 import FlashMessage from "react-native-flash-message";
 import { showMessage, hideMessage } from "react-native-flash-message";
-import * as Google1 from "expo-google-app-auth";
 
 
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
 
-export default function Registration({ navigation }) {
+export default function GoogleRegistrationScreen({ navigation }) {
       const [text1, setText1] = useState('');
       const [text2, setText2] = useState('');
       const [text3, setText3] = useState('');
       const [text4, setText4] = useState('');
+      const username = navigation.getParam('user_name', null)
+      const email = navigation.getParam('user_email', null)
 
       const formData = new FormData();
-      formData.append('login',text1);
-      formData.append('email',text2);
+      formData.append('login',username);
+      formData.append('email',email);
       formData.append('password',text3);
       formData.append('password2',text4);
 
@@ -44,24 +45,6 @@ export default function Registration({ navigation }) {
               })
       }
 
-
-      async function signInWithGoogleAsync() {
-        try {
-            const result = await Google1.logInAsync({
-              iosClientId: '744227890838-i11eoaf4crfiet6vckhfef1ubuhdhula.apps.googleusercontent.com',
-              androidClientId: '744227890838-labivtsmrsmb7likdrbpde1ug4mg6mb2.apps.googleusercontent.com',
-              scopes: ['profile', 'email'],
-            });
-        if (result.type === 'success') {
-              navigation.navigate('GoogleRegister', {user_name: result.user.name, user_email: result.user.email});
-        } else {
-              console.log("cancelled");
-        }
-        } catch (e) {
-              console.log(e);
-        }
-}
-
     return (
         <View
             style={styles.container}>
@@ -72,6 +55,7 @@ export default function Registration({ navigation }) {
                 <View
                     style={styles.rectangle}>
                     <Text style={styles.header}>SIGN UP</Text>
+                    <Text style={{fontSize: 16, textAlign: 'center', color: '#242F68', marginTop: -30}}>Please, enter the password!</Text>
                 </View>
             </View>
             <View
@@ -79,15 +63,13 @@ export default function Registration({ navigation }) {
                 <TextInput
                     style={styles.textinput}
                     placeholder="Username"
-                    onChangeText={text1 => setText1(text1.toString())}
-                    defaultValue={text1}
+                    defaultValue={username}
                 />
                 <TextInput
                     style={styles.textinput}
                     placeholder="E-mail"
                     underlineColorAndroid={'transparent'}
-                    onChangeText={text2 => setText2(text2.toString())}
-                    defaultValue={text2}
+                    defaultValue={email}
                 />
                 <TextInput
                     style={styles.textinput}
@@ -109,26 +91,6 @@ export default function Registration({ navigation }) {
                     onPress={OnClick}>
                     <Text style={styles.btntext}>Sign up</Text>
                 </TouchableOpacity>
-
-                <View>
-                    <TouchableOpacity
-                        style={{alignItems: "center", height: wH*0.02}}
-                        onPress = {signInWithGoogleAsync}>
-                        <Text style={{fontSize: 12,
-                                     marginTop: 0,
-                                     color: 'rgba(5,5,5,0.52)',
-                                     fontWeight: "bold",
-                                     textAlign: 'center',
-                                     textDecorationLine: 'underline'}}>Sign up with <Google /></Text>
-                    </TouchableOpacity>
-
-                    <Text style={styles.text}>Already have an account?
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.text2}> Sign in</Text>
-                    </TouchableOpacity></Text>
-                    <FlashMessage position='top' />
-                </View>
             </View>
         </View>
     );
@@ -176,7 +138,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
   input1: {
-      marginTop: wH*0.01,
+      marginTop: wH*0.03,
     },
   textinput: {
      alignItems: 'center',
