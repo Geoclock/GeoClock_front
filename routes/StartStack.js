@@ -1,6 +1,6 @@
 import {Dimensions, StyleSheet} from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import {createAppContainer, withNavigation} from 'react-navigation';
 import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
@@ -142,7 +142,7 @@ const screens = {
                 headerTintColor: '#FFFBFB',
                 headerHideShadow: true,
                 headerStyle: {
-                    backgroundColor: 'rgb(68,47,110)',
+                    backgroundColor: 'rgba(67, 48, 112, 1)',
                     elevation:0,
                     shadowColor: 'transparent',}
             }
