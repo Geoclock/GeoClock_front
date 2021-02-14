@@ -1,6 +1,18 @@
-import {StyleSheet, Text, Alert, Modal, Pressable, TextInput, View, Dimensions, TouchableOpacity, Button} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Alert,
+  Modal,
+  Pressable,
+  TextInput,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Button,
+  Image
+} from 'react-native';
 import React, {Component} from "react";
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import {withNavigation} from "react-navigation";
 import Geo from "../Images/Geo";
 import Notification from "../Images/Notification";
@@ -31,8 +43,13 @@ class DefaultScreen extends Component {
         latitude: 0,
         longitude: 0,
       },
+      markerTag: {
+        tag: 0,
+      },
       show: false,
+      markers: [],
     };
+    this.handlePress = this.handlePress.bind(this);
   }
 
     watchID : ?number = null
@@ -52,9 +69,10 @@ class DefaultScreen extends Component {
 
         this.setState({initialPosition: initialRegion})
         this.setState({markerPosition: initialRegion})
+        console.log('State:', this.state)
       },
       (error) => alert(JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 200, maximumAge: 10}
+      {enableHighAccuracy: true, timeout: 200, maximumAge: 10, distanceFilter: 0,}
       )
 
       this.watchID = navigator.geolocation.watchPosition((position) => {
@@ -77,6 +95,18 @@ class DefaultScreen extends Component {
     navigator.geolocation.clearWatch(this.watchID)
   }
 
+  handlePress(e){
+    this.setState({
+      markers: [
+          ... this.state.markers,
+        {
+          tag: e.nativeEvent.tag,
+          coordinate: e.nativeEvent.coordinate,
+          //cost: image
+        }
+      ]
+    })
+  }
   render(){
     const { navigation } = this.props;
       return(
@@ -84,13 +114,25 @@ class DefaultScreen extends Component {
                 style={styles.container}>
               <MapView
                   style={styles.map}
-                  region={this.state.initialPosition}>
+                  zoomControlEnabled={true}
+                  region={this.state.initialPosition}
+                  onPress={this.handlePress}>
                   <MapView.Marker
-                      coordinate={this.state.markerPosition}>
+                      coordinate={this.state.markerPosition}
+                      tag={this.state.markerTag}>
                       <View style={styles.radius}>
                           <View style={styles.marker}/>
                       </View>
                   </MapView.Marker>
+                  {this.state.markers.map((marker)=>{
+                      return (
+                      <Marker {...marker}>
+                        <View>
+                          <Image style = {{ width: 39, height: 55,}} source = {require('../assets/marker.png')}/>
+                        </View>
+                      </Marker>
+                    )
+                    })}
               </MapView>
               <TouchableOpacity style={[styles.circle4]} onPress={() => this.setState({show:true})}><View><Add/></View></TouchableOpacity>
               <Modal
@@ -219,6 +261,7 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height*0.785,
+    //flex: 1,
   },
   menu: {
       width: Ww/4,
