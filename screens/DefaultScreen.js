@@ -20,18 +20,17 @@ import Account from "../Images/Account";
 import Settings from "../Images/Settings";
 import Add from "../Images/Add";
 import Exit from "../Images/Exit";
-
+import Map from "../Images/Map";
+let id = 0;
 const {width, height} = Dimensions.get('window')
 const Wh = height
 const Ww = width
 const ASPECT_RATIO = width / height
 const LATTITUDE_DELTA = 0.03
 const LONGITUDE_DELTA = LATTITUDE_DELTA * ASPECT_RATIO
-
 class DefaultScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       initialPosition: {
         latitude: 0,
@@ -43,30 +42,23 @@ class DefaultScreen extends Component {
         latitude: 0,
         longitude: 0,
       },
-      markerTag: {
-        tag: 0,
-      },
-      show: false,
+      //show: false,
       markers: [],
     };
     this.handlePress = this.handlePress.bind(this);
   }
-
     watchID : ?number = null
-
     componentDidMount()
     {
       navigator.geolocation.getCurrentPosition((position) => {
         var lat = parseFloat(position.coords.latitude)
         var long = parseFloat(position.coords.longitude)
-
         var initialRegion={
           latitude: lat,
           longitude: long,
           latitudeDelta: LATTITUDE_DELTA,
           longitudeDelta: LONGITUDE_DELTA,
         }
-
         this.setState({initialPosition: initialRegion})
         this.setState({markerPosition: initialRegion})
         console.log('State:', this.state)
@@ -74,38 +66,32 @@ class DefaultScreen extends Component {
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 200, maximumAge: 10, distanceFilter: 0,}
       )
-
       this.watchID = navigator.geolocation.watchPosition((position) => {
           var lat = parseFloat(position.coords.latitude)
           var long = parseFloat(position.coords.longitude)
-
           var lastRegion = {
             latitude: lat,
             longitude: long,
             latitudeDelta: LATTITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }
-
           this.setState({initialPosition: lastRegion})
           this.setState({markerPosition: lastRegion})
       })
     }
-
   componentWillUnmount(){
     navigator.geolocation.clearWatch(this.watchID)
   }
-
   handlePress(e){
     this.setState({
       markers: [
           ... this.state.markers,
         {
-          tag: e.nativeEvent.tag,
           coordinate: e.nativeEvent.coordinate,
-          //cost: image
         }
       ]
     })
+    console.log(this.state.markers);
   }
   render(){
     const { navigation } = this.props;
@@ -118,19 +104,14 @@ class DefaultScreen extends Component {
                   region={this.state.initialPosition}
                   onPress={this.handlePress}>
                   <MapView.Marker
-                      coordinate={this.state.markerPosition}
-                      tag={this.state.markerTag}>
+                      coordinate={this.state.markerPosition}>
                       <View style={styles.radius}>
                           <View style={styles.marker}/>
                       </View>
                   </MapView.Marker>
-                  {this.state.markers.map((marker)=>{
+                    {this.state.markers.map((marker,i)=>{
                       return (
-                      <Marker {...marker}>
-                        <View>
-                          <Image style = {{ width: 39, height: 55,}} source = {require('../assets/marker.png')}/>
-                        </View>
-                      </Marker>
+                        <MapView.Marker key={i} coordinate={marker.coordinate}><Image style = {{ width: 39, height: 55,}} source = {require('../assets/marker.png')}/></MapView.Marker>
                     )
                     })}
               </MapView>
@@ -139,7 +120,6 @@ class DefaultScreen extends Component {
                 animationType="slide"
                 transparent={true}
                 visible={this.state.show}>
-
                 <View style={styles.centeredView}>
                   <View style={styles.modalView}>
                     <TouchableOpacity
@@ -162,7 +142,6 @@ class DefaultScreen extends Component {
                   </View>
                 </View>
               </Modal>
-
               <View style={{flexDirection: 'row', justifyContent: 'flex-end', Bottom: 0, backgroundColor: null}}>
                 <TouchableOpacity activeOpacity={1} style={styles.menu}
                                   onPress={() => navigation.navigate('Geolocation')}>
@@ -170,26 +149,20 @@ class DefaultScreen extends Component {
                        <View style={styles.circle2}><Geo/></View>
                     </View>
                 </TouchableOpacity>
-
                 <TouchableOpacity activeOpacity={1} style={styles.menu}
                                   onPress={() => navigation.navigate('Notification')}>
                 <Notification /></TouchableOpacity>
-
                 <TouchableOpacity activeOpacity={1} style={styles.menu}
                                   onPress={() => navigation.navigate('Account')}>
                 <Account /></TouchableOpacity>
-
                 <TouchableOpacity activeOpacity={1} style={styles.menu}
                                   onPress={() => navigation.navigate('Settings')}>
                 <Settings /></TouchableOpacity>
               </View>
             </View>
-
         )
   }
-
 }
-
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
@@ -300,5 +273,4 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
 });
-
 export default withNavigation(DefaultScreen)
