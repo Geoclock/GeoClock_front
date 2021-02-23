@@ -8,7 +8,7 @@ const GetAllNotifications = async (user_id) => {
 
   try {
     const response = await Http.post("/AllNotificationRead", data).data;
-    list = response.data["notifications"];
+    list = response["notifications"];
   } catch (err) {
     console.error(err);
   }
