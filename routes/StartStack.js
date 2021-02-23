@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {Dimensions, StyleSheet} from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import StartScreen from "../screens/StartScreen";
@@ -8,7 +8,12 @@ import ResetPassMessageScreen from "../screens/ResetPassMessageScreen";
 import ResetPassEmailScreen from "../screens/ResetPassEmailScreen";
 import ResetPassNewScreen from "../screens/ResetPassNewScreen";
 import DefaultScreen from "../screens/DefaultScreen";
+import NotificationsScreen from "../screens/NotificationsScreen";
+import GeolocationsScreen from "../screens/GeolocationsScreen";
+import AccountScreen from "../screens/AccountScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
+const wH = Dimensions.get('window').height;
 
 const screens = {
         Start:{
@@ -74,6 +79,58 @@ const screens = {
                 headerHideShadow: true,
                 headerStyle: {
                     backgroundColor: 'rgb(68,47,110)',
+                    elevation:0,
+                    shadowColor: 'transparent',}
+            }
+        },
+        Notification:{
+            screen:NotificationsScreen,
+            navigationOptions: {
+                title: null,
+                headerTintColor: '#FFFBFB',
+                headerHideShadow: true,
+                headerStyle: {
+                    backgroundColor: 'rgba(67, 48, 112, 1)',
+                    height: 0.11*wH,
+                    elevation:0,
+                    shadowColor: 'transparent',}
+            }
+        },
+        Geolocation:{
+            screen:GeolocationsScreen,
+            navigationOptions: {
+                title: null,
+                headerTintColor: '#FFFBFB',
+                headerHideShadow: true,
+                headerStyle: {
+                    backgroundColor: 'rgba(67, 48, 112, 1)',
+                    height: 0.11*wH,
+                    elevation:0,
+                    shadowColor: 'transparent',}
+            }
+        },
+        Account:{
+            screen:AccountScreen,
+            navigationOptions: {
+                title: null,
+                headerTintColor: '#FFFBFB',
+                headerHideShadow: true,
+                headerStyle: {
+                    backgroundColor: 'rgba(67, 48, 112, 1)',
+                    height: 0.11*wH,
+                    elevation:0,
+                    shadowColor: 'transparent',}
+            }
+        },
+        Settings:{
+            screen:SettingsScreen,
+            navigationOptions: {
+                title: null,
+                headerTintColor: '#FFFBFB',
+                headerHideShadow: true,
+                headerStyle: {
+                    backgroundColor: 'rgba(67, 48, 112, 1)',
+                    height: 0.11*wH,
                     elevation:0,
                     shadowColor: 'transparent',}
             }

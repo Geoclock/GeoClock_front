@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from "react-native";
 import StartImage from '../assets/background_image.png';
+import geo from "../Images/Geo";
 
 const Ww = Dimensions.get('window').width;
 const Wh = Dimensions.get('window').height;
@@ -15,13 +16,34 @@ export default function StartScreen({navigation}) {
             onPress={() => navigation.navigate('Login')}>
             <Text style={styles.text}>Sign in</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
             style={styles.sign_up}
             onPress={() => navigation.navigate('Register')}>
             <Text style={styles.text}>Sign up</Text>
         </TouchableOpacity>
-
+          <TouchableOpacity
+            style={{
+            borderRadius: 33,
+            borderColor: "#E9ECF7",
+            borderWidth: 2,
+            marginTop: 10,
+            width: 297,
+            height: 40,
+            alignItems: 'center'}}
+            onPress={() => navigation.navigate('Default')}>
+            <Text style={styles.text}>Maps</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            style={{borderRadius: 33,
+            borderColor: "#E9ECF7",
+            borderWidth: 2,
+            marginTop: 10,
+            width: 297,
+            height: 40,
+            alignItems: 'center'}}
+            onPress={() => navigation.navigate('Notification')}>
+            <Text style={styles.text}>Notification</Text>
+        </TouchableOpacity>
       </ImageBackground>
     </View>
   );
