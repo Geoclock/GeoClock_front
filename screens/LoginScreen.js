@@ -1,17 +1,25 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, Image, Button} from 'react-native';
-import React, {useState} from "react";
+import React, {useState,Fragment} from "react";
 import Google from "../Images/Google";
 import Http from "../ConnectionToFlask";
 import FlashMessage, {showMessage} from "react-native-flash-message";
 import * as Google1 from 'expo-google-app-auth';
 import {ActivityIndicator} from "react-native-web";
+import storage from "../Storage/Initialize";
+import {Provider, useDispatch} from 'react-redux';
+import ProfileINFO from "../Storage/Components/ProfileINFO";
+import {addUserINFO} from "../Storage/Actions/UserActions";
+import GetUserData from "../Storage/CommunicationDB/UserCommunication";
+import NotificationCommunication from "../Storage/CommunicationDB/NotificationCommunication"
+import {addNotification} from "../Storage/Actions/NotificationActions";
 
 
 const wW = Dimensions.get('window').width;
 const wH = Dimensions.get('window').height;
 
 
-export default function LoginScreen({navigation}) {
+
+const LoginScreen = ({navigation}) => {
     const [text1, setText1] = useState('');
     const [text2, setText2] = useState('');
     const [textGoogle1, setTextGoogle1] = useState('');
@@ -21,13 +29,51 @@ export default function LoginScreen({navigation}) {
     data.append('login', text1);
     data.append('password', text2);
 
+    const dispatch =useDispatch();
+
+    const AddUserINFO = (id) => {
+        const userdata = GetUserData(id);
+        console.log(userdata,'iii');
+            //console.log(userdata.user_login);
+                dispatch(
+                    addUserINFO(
+                        userdata
+                        //GetUserData(id)
+                ));
+
+    }
+
+    const AddNotificationList = (id) => {
+        const notification_list = NotificationCommunication("GetAllNotifications", id,0,0);
+        console.log('MyArray',notification_list, typeof notification_list, notification_list.length);
+        Array.from(notification_list);
+        console.log(notification_list, typeof notification_list, notification_list.length);
+
+        (notification_list).map((notification,index) => {
+            if(notification !== {})
+            {
+                console.log("object_note",notification);
+                dispatch(addNotification(notification));
+            }
+
+
+        });
+    }
+
+
     const OnClick = () => {
         const resp = {}
         Http.post('/Login', data)
-        .then(function (response) {
+        .then(function (response){
             resp['status'] = response.data['status'];
             resp['message'] = response.data['message'];
-            if(resp['status']==200){ navigation.navigate('Default');}
+            const user_id = response.data['id'];
+            if(resp['status']==200){
+                AddUserINFO(user_id);
+                AddNotificationList(user_id);
+                navigation.navigate('Notification');
+                //navigation.navigate('Loading');
+            }
             else {
                 showMessage({
                     message: resp['message'],
@@ -61,7 +107,11 @@ export default function LoginScreen({navigation}) {
                 const resp = {}
                 resp['status'] = response.data['status'];
                 resp['message'] = response.data['message'];
-                if(resp['status']==200){ navigation.navigate('Default');}
+                const user_id = response.data['id'];
+                if(resp['status']==200){
+                    AddUserINFO(user_id);
+                    AddNotificationList(user_id);
+                    navigation.navigate('Default');}
                 else {
                     showMessage({
                         message: resp['message'],
@@ -252,3 +302,5 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
 });
+
+export default  LoginScreen

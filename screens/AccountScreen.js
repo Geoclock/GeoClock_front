@@ -8,12 +8,14 @@ import Settings from "../Images/Settings";
 import Maps from "../Images/Map";
 import Add from "../Images/Add";
 import Delete from "../Images/Delete";
-import Name from "../Images/Name";
-import Post from "../Images/Post";
+//import Name from "../Images/Name";
+//import Post from "../Images/Post";
 import ScrollView from 'expo-faded-scrollview';
 import Http from "../ConnectionToFlask";
 import {showMessage} from "react-native-flash-message";
-
+import ProfileINFO from "../Storage/Components/ProfileINFO";
+import {Provider} from 'react-redux';
+import storage from "../Storage/Initialize";
 
 const Ww = Dimensions.get('window').width;
 const Wh = Dimensions.get('window').height;
@@ -40,20 +42,7 @@ export default function AccountScreen({navigation}) {
       <View style={styles.rectangle1}>
           <ScrollView style={styles.rectangle} fadeSize={40} scrollThreshold={0} fadeColors={['rgba(255,255,255,0)', 'rgba(225, 225, 225, 0.75)']}>
             <Text style={styles.header}>PROFILE</Text>
-
-            <Text
-                style={styles.textinput}><Name /> Username:
-            </Text>
-            <Text
-                style={styles.text}>Example name
-            </Text>
-            <Text
-                style={styles.textinput}><Post /> E-mail:
-            </Text>
-            <Text
-                style={styles.text}>examplemail@mail.com
-            </Text>
-
+               <ProfileINFO />
             <TouchableOpacity onPress={OnClick}
                 style={styles.button}>
               <Text style={styles.btntext}>Logout</Text>

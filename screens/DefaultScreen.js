@@ -1,4 +1,4 @@
-import {StyleSheet, Text, Alert, Modal, Pressable, TextInput, View, Dimensions, TouchableOpacity, Button} from 'react-native';
+/*import {StyleSheet, Text, Alert, Modal, Pressable, TextInput, View, Dimensions, TouchableOpacity, Button} from 'react-native';
 import React, {Component} from "react";
 import MapView from 'react-native-maps';
 import {withNavigation} from "react-navigation";
@@ -259,3 +259,4 @@ const styles = StyleSheet.create({
 });
 
 export default withNavigation(DefaultScreen)
+*/

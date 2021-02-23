@@ -10,29 +10,36 @@ import Maps from "../Images/Map";
 import Add from "../Images/Add";
 import Delete from "../Images/Delete";
 import ScrollView from 'expo-faded-scrollview';
-
+import NotificationList from "../Storage/Components/NotificationList";
+import storage from "../Storage/Initialize";
 
 
 const Ww = Dimensions.get('window').width;
 const Wh = Dimensions.get('window').height;
 
 export default function NotificationsScreen({navigation}) {
+  //const Reload=()=>{
+     //this.setState();
+  //}
   return (
+
     <View style={styles.container}>
       <LinearGradient
         colors={['rgba(63,44,109,1)', 'rgba(211,237,255,1)']}
         style={styles.background}
       />
+
       <View style={styles.rectangle1}>
           <ScrollView style={styles.rectangle} fadeSize={30}>
             <Text style={styles.text}>Notification</Text>
+            <NotificationList />
              <LinearGradient
                 colors={['transparent', 'rgba(67,48,112,0.01)']}
                 style={styles.rectangle1}>
              </LinearGradient>
           </ScrollView>
           <TouchableOpacity style={styles.circle3} onPress={() => navigation.navigate('Default')}><View><Maps/></View></TouchableOpacity>
-          <TouchableOpacity style={styles.circle4} onPress={() => navigation.navigate('Notification')}><View><Add/></View></TouchableOpacity>
+          <TouchableOpacity style={styles.circle4} onPress={() => navigation.navigate('CreateNotification')}><View><Add/></View></TouchableOpacity>
       </View>
       {/*Нижня панель*/}
       <View style={{flexDirection: 'row', justifyContent: 'flex-end', Bottom: 0, backgroundColor: null}}>
