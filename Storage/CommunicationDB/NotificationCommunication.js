@@ -1,18 +1,18 @@
 import React from "react";
 import Http from "../../ConnectionToFlask";
 
-const GetAllNotifications = (user_id) => {
+const GetAllNotifications = async (user_id) => {
   const data = new FormData();
   data.append("user_id", user_id);
   let list = [];
-  Http.post("/AllNotificationRead", data).then(
-    (response) => {
-      list = response.data["notifications"];
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
+
+  try {
+    const response = await Http.post("/AllNotificationRead", data).data;
+    list = response.data["notifications"];
+  } catch (err) {
+    console.error(err);
+  }
+
   return list;
 };
 
