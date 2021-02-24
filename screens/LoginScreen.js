@@ -12,6 +12,12 @@ import {addUserINFO} from "../Storage/Actions/UserActions";
 import GetUserData from "../Storage/CommunicationDB/UserCommunication";
 import NotificationCommunication from "../Storage/CommunicationDB/NotificationCommunication"
 import {addNotification} from "../Storage/Actions/NotificationActions";
+import {addNotesubjection} from "../Storage/Actions/NotesubjectionActions";
+import GetAllNoteSubjections from "../Storage/CommunicationDB/NotesubjectionCommunication";
+import GeolocationCommunication from "../Storage/CommunicationDB/GeolocationCommunication";
+import {addGeolocation} from "../Storage/Actions/GeolocationActions";
+import FolderCommunication from "../Storage/CommunicationDB/FolderCommunication";
+import {addFolder} from "../Storage/Actions/FolderActions";
 
 
 const wW = Dimensions.get('window').width;
@@ -33,33 +39,56 @@ const LoginScreen = ({navigation}) => {
 
     const AddUserINFO = (id) => {
         const userdata = GetUserData(id);
-        console.log(userdata,'iii');
-            //console.log(userdata.user_login);
                 dispatch(
-                    addUserINFO(
-                        userdata
-                        //GetUserData(id)
-                ));
+                    addUserINFO(userdata)
+                );
 
     }
 
-    const AddNotificationList = (id) => {
-        const notification_list = NotificationCommunication("GetAllNotifications", id,0,0);
-        console.log('MyArray',notification_list, typeof notification_list, notification_list.length);
-        Array.from(notification_list);
-        console.log(notification_list, typeof notification_list, notification_list.length);
-
-        (notification_list).map((notification,index) => {
-            if(notification !== {})
-            {
-                console.log("object_note",notification);
+    const AddNotificationList = async (id) => {
+        const notification_list = NotificationCommunication(
+            "GetAllNotifications",
+            id
+        );
+        await notification_list.then(function (notifications){
+            notifications.map((notification) => {
                 dispatch(addNotification(notification));
-            }
-
-
+            });
         });
     }
 
+    const AddGeolocationList = async (id) => {
+        const geolocation_list = GeolocationCommunication(
+            'GetAllGeolocations',
+            id
+        );
+        await geolocation_list.then(function (geolocations){
+            geolocations.map((geolocation)=> {
+                dispatch(addGeolocation(geolocation));
+            });
+        });
+    }
+
+    const AddFolderList = async (id) =>{
+        const folder_list = FolderCommunication(
+            'GetAllFolders',
+            id
+        );
+        await  folder_list.then(function (folders){
+            folders.map((folder) => {
+                dispatch(addFolder(folder));
+            });
+        });
+    }
+
+    const AddNotesubjectionList = async (id) => {
+        const notesubjection_list = GetAllNoteSubjections(id);
+        await  notesubjection_list.then(function (notesubjections){
+            notesubjections.map((notesubjection)=>{
+                dispatch(addNotesubjection(notesubjection));
+            });
+        });
+    }
 
     const OnClick = () => {
         const resp = {}
@@ -71,6 +100,9 @@ const LoginScreen = ({navigation}) => {
             if(resp['status']==200){
                 AddUserINFO(user_id);
                 AddNotificationList(user_id);
+                AddGeolocationList(user_id);
+                AddFolderList(user_id);
+                AddNotesubjectionList(user_id);
                 navigation.navigate('Notification');
                 //navigation.navigate('Loading');
             }

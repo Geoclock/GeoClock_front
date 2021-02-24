@@ -14,6 +14,7 @@ import AccountScreen from "../screens/AccountScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import GoogleRegistrationScreen from "../screens/GoogleRegisterScreen";
 import NotificationCreate from "../screens/CreateNotificationScreen";
+import NotificationEdit from "../screens/EditNotificationScreen";
 
 const wH = Dimensions.get('window').height;
 
@@ -150,18 +151,7 @@ const screens = {
             }
         },
         Default: {
-            screen:NotificationsScreen,
-            navigationOptions: {
-                title: null,
-                headerTintColor: '#FFFBFB',
-                headerHideShadow: true,
-                headerStyle: {
-                    backgroundColor: 'rgba(67, 48, 112, 1)',
-                    height: 0.11*wH,
-                    elevation:0,
-                    shadowColor: 'transparent',}
-            }
-            /*screen: DefaultScreen,
+            screen: DefaultScreen,
             navigationOptions: {
                 title: null,
                 headerTintColor: '#FFFBFB',
@@ -170,7 +160,7 @@ const screens = {
                     backgroundColor: 'rgb(68,47,110)',
                     elevation:0,
                     shadowColor: 'transparent',}
-            }*/
+            }
         },
         CreateNotification: {
             screen: NotificationCreate,
@@ -184,7 +174,20 @@ const screens = {
                     elevation:0,
                     shadowColor: 'transparent',}
             }
+        },
+    EditNotification: {
+            screen: NotificationEdit,
+        navigationOptions: {
+            title: null,
+            headerTintColor: '#FFFBFB',
+            headerHideShadow: true,
+            headerStyle: {
+                backgroundColor: 'rgba(67, 48, 112, 1)',
+                height: 0.11*wH,
+                elevation:0,
+                shadowColor: 'transparent',}
         }
+    }
 }
 
 const styles = StyleSheet.create({

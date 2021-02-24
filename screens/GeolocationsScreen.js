@@ -9,6 +9,7 @@ import Maps from "../Images/Map";
 import Add from "../Images/Add";
 import Delete from "../Images/Delete";
 import ScrollView from 'expo-faded-scrollview';
+import GeolocationList from "../Storage/Components/GeolocationList";
 
 
 
@@ -26,10 +27,12 @@ export default function GeolocationsScreen({navigation}) {
       <View style={styles.rectangle1}>
           <ScrollView style={styles.rectangle} fadeSize={30}>
             <Text style={styles.text}>Geolocation</Text>
+            <GeolocationList/>
              <LinearGradient
                 colors={['transparent', 'rgba(67,48,112,0.01)']}
                 style={styles.rectangle1}>
              </LinearGradient>
+
           </ScrollView>
         <TouchableOpacity style={styles.circle3} onPress={() => navigation.navigate('Default')}><View><Maps/></View></TouchableOpacity>
           <TouchableOpacity style={styles.circle4} onPress={() => navigation.navigate('Geolocation')}><View><Add/></View></TouchableOpacity>

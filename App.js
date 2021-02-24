@@ -7,5 +7,5 @@ import ResetPassEmailScreen from "./screens/ResetPassEmailScreen";
 import storage from "./Storage/Initialize";
 
 export default function App(){
-    return( <Provider store={storage}><Navigator /></Provider>)
+    return( <Provider store={storage}><Navigator /></Provider>);
 }

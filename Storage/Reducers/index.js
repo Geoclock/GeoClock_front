@@ -10,7 +10,7 @@ const combinedReducers = combineReducers({
     notifications: NotificationReducer,
     folders: FolderReducer,
     userINFO: UserReducer,
-    notesubjection: NotesubjectionReducer
+    notesubjections: NotesubjectionReducer
 });
 
 export default combinedReducers

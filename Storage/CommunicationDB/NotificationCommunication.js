@@ -3,29 +3,17 @@ import Http from "../../ConnectionToFlask";
 
 
 
-const GetAllNotifications = (user_id) => {
+const GetAllNotifications = async (user_id) => {
     const data = new FormData();
     data.append('user_id',user_id);
-    const resp = {};
-    const list = [];
-    Http.post('/AllNotificationRead', data)
-        .then(function (response){
-            resp['status'] = response.data['status'];
-            resp['notifications'] = response.data['notifications'];
-            //console.log('list!!',resp['notifications'], typeof  resp['notifications']);
-            (resp['notifications']).map(notification =>{
-                //console.log('tyt', notification);
-                const request = {};
-                request['id'] = notification['id'];
-
-                request['notification'] = notification['notification'];
-                request['radius'] = notification['radius'];
-                list.push(request);
-                console.log('#',list,typeof list,list.length);
-            });
-    }, error => {
-            console.log(error);
-        });
+    //const resp = {};
+    let list = [];
+    try {
+        const response = await Http.post("/AllNotificationRead", data);
+        list = response.data["notifications"];
+    } catch (err) {
+        console.error(err);
+    }
     console.log('final list ',list,typeof list,list.length);
     return(list);
 }
